@@ -28,13 +28,9 @@ stdout_logfile=syslog
 stderr_logfile=syslog
 dependent_startup=true
 
-{% if not skip_chassisd %}
+{% if not skip_chassisd and IS_MODULAR_CHASSIS == 1 %}
 [program:chassisd]
-{% if IS_MODULAR_CHASSIS == 1 %}
 command=/usr/local/bin/chassisd
-{% else %}
-command=/usr/local/bin/chassisd --init-only
-{% endif %}
 priority=3
 autostart=false
 autorestart=false

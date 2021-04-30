@@ -389,7 +389,7 @@ class Chassis(ChassisBase):
             records = body.split(b'\x00')
 
             for k, v in DMI_TABLE_MAP.items():
-                result[k] = records[v]
+                result[k] = records[v].decode("utf-8")
 
         except Exception as e:
             logger.log_error("Fail to decode DMI {} due to {}".format(filename, repr(e)))

@@ -25,3 +25,6 @@ class Platform(PlatformBase):
         else:
             self._chassis.initialize_fan()
             self._chassis.initialize_thermals()
+
+    def __del__(self):
+        del self._chassis

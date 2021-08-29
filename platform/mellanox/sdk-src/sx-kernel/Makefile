@@ -16,6 +16,7 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 		pushd Switch-SDK-drivers
 		git reset --hard
 		git clean -xfd
+		git am ../*.patch
 	fi
 
 	# build

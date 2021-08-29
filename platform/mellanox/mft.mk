@@ -1,5 +1,7 @@
 # Mellanox SAI
 
+ifneq ($(BLDENV), buster)
+
 MFT_VERSION = 4.17.0
 MFT_REVISION = 106
 
@@ -15,3 +17,5 @@ $(eval $(call add_derived_package,$(MFT),$(KERNEL_MFT)))
 
 MFT_OEM = mft-oem_$(MFT_VERSION)-$(MFT_REVISION)_amd64.deb
 $(eval $(call add_derived_package,$(MFT),$(MFT_OEM)))
+
+endif

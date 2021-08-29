@@ -1,0 +1,25 @@
+From 0188d76b14cd9d681849f0e7966fe188ad831d77 Mon Sep 17 00:00:00 2001
+From: Alexander Allen <arallen@nvidia.com>
+Date: Sun, 29 Aug 2021 03:58:03 +0000
+Subject: [PATCH] Disable MLXFW module
+
+---
+ sx_scripts/configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sx_scripts/configure b/sx_scripts/configure
+index b7d2ef8..3a133ba 100755
+--- a/sx_scripts/configure
++++ b/sx_scripts/configure
+@@ -170,7 +170,7 @@ CONFIG_SX_CORE="m"
+ CONFIG_SX_NETDEV="m"
+ CONFIG_SX_EMAD_DUMP="m"
+ CONFIG_SX_BFD="m"
+-CONFIG_MLXFW="m"
++CONFIG_MLXFW="n"
+ KVERSION=${KVERSION:-$(uname -r)}
+ MIN_KVERSION="2.6.27"
+ MODULES_DIR=${MODULES_DIR:-/lib/modules/${KVERSION}/updates}
+-- 
+2.17.1
+

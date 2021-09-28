@@ -25,6 +25,11 @@ ifeq ($(ENABLE_SYNCD_RPC),y)
 $(SYNCD)_DEPENDS += $(LIBSAITHRIFT_DEV)
 endif
 
+# Set KVERSION correctly depending on build environment
+ifeq ($(BLDENV), buster)
+KVERSION = 5.10.0-0.bpo.8-amd64
+endif
+
 # Runtime dependency on mlnx sai is set only for syncd
 $(SYNCD)_RDEPENDS += $(MLNX_SAI)
 

@@ -2,8 +2,6 @@
 SHELL = /bin/bash
 .SHELLFLAGS += -e
 
-KVERSION = 5.10.0-0.bpo.8-amd64
-
 MFT_NAME = mft-$(MFT_VERSION)-$(MFT_REVISION)-x86_64-deb
 MFT_TGZ = $(MFT_NAME).tgz
 

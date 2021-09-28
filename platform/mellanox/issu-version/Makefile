@@ -11,6 +11,4 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 		rm $(DEST)/$(MAIN_TARGET)
 		exit 1
 	}
-	echo $(BULLSEYE_FILES_PATH)
-	exit 1
 	cp $(DEST)/$(MAIN_TARGET) $(BULLSEYE_FILES_PATH)/$(MAIN_TARGET)

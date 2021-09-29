@@ -1,3 +1,8 @@
+# Set KVERSION correctly depending on build environment
+ifeq ($(BLDENV), buster)
+KVERSION = 5.10.0-0.bpo.8-amd64
+endif
+
 include $(PLATFORM_PATH)/sdk.mk
 include $(PLATFORM_PATH)/fw.mk
 include $(PLATFORM_PATH)/mft.mk
@@ -23,11 +28,6 @@ $(SYNCD)_UNINSTALLS += $(MLNX_SAI)
 
 ifeq ($(ENABLE_SYNCD_RPC),y)
 $(SYNCD)_DEPENDS += $(LIBSAITHRIFT_DEV)
-endif
-
-# Set KVERSION correctly depending on build environment
-ifeq ($(BLDENV), buster)
-KVERSION = 5.10.0-0.bpo.8-amd64
 endif
 
 # Runtime dependency on mlnx sai is set only for syncd

@@ -17,6 +17,9 @@
 # libsaithrift-dev package
 
 SAI_VER = 0.9.4
+SAITHRIFT_VER = v2
+
+export SAITHRIFT_VER
 
 LIBSAITHRIFT_DEV = libsaithrift-dev_$(SAI_VER)_amd64.deb
 $(LIBSAITHRIFT_DEV)_SRC_PATH = $(SRC_PATH)/sonic-sairedis/SAI

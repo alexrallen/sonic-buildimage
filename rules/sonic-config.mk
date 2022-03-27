@@ -20,10 +20,6 @@ $(SONIC_CONFIG_ENGINE_PY3)_DEBS_DEPENDS += $(LIBYANG) \
                                            $(LIBYANG_CPP) \
                                            $(LIBYANG_PY3) \
 	                                       $(PYTHON3_SWSSCOMMON)
-ifeq ($(ENABLE_PY2_MODULES), y)
-    # Synthetic dependency to avoid building the Python 2 and 3 packages
-    # simultaneously and any potential conflicts which may arise
-    $(SONIC_CONFIG_ENGINE_PY3)_DEPENDS += $(SONIC_CONFIG_ENGINE_PY2)
-endif
+
 $(SONIC_CONFIG_ENGINE_PY3)_PYTHON_VERSION = 3
 SONIC_PYTHON_WHEELS += $(SONIC_CONFIG_ENGINE_PY3)

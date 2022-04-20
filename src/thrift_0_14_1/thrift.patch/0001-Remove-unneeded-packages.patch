@@ -19,7 +19,7 @@ index a9e934f17..752076582 100644
 -    erlang-base, ruby-dev | ruby1.9.1-dev, ruby-bundler ,autoconf, automake,
 -    pkg-config, libtool, bison, flex, libboost-dev | libboost1.56-dev | libboost1.63-all-dev,
 -    python-all, python-setuptools, python-all-dev, python-all-dbg,
-+Build-Depends: debhelper (>= 9), build-essential, python-dev,
++Build-Depends: debhelper (>= 9), build-essential,
 +    autoconf, automake,
 +    pkg-config, libtool,
 +    python-all, python-setuptools, python-all-dev,

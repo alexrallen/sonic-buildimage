@@ -75,7 +75,7 @@ tmp_dir=$(mktemp --directory)
 tmp_installdir="$tmp_dir/installer"
 mkdir $tmp_installdir || clean_up 1
 
-cp -r $installer_dir/$arch/* $tmp_installdir || clean_up 1
+cp -r $installer_dir/* $tmp_installdir || clean_up 1
 cp onie-image.conf $tmp_installdir
 cp onie-image-*.conf $tmp_installdir
 

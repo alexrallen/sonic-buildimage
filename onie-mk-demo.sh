@@ -23,9 +23,9 @@ if  [ ! -d $installer_dir ] || \
     exit 1
 fi
 
-if  [ ! -d $installer_dir/$arch ] || \
-    [ ! -r $installer_dir/$arch/install.sh ] ; then
-    echo "Error: Invalid arch installer directory: $installer_dir/$arch"
+if  [ ! -d $installer_dir ] || \
+    [ ! -r $installer_dir/install.sh ] ; then
+    echo "Error: Invalid arch installer directory: $installer_dir"
     exit 1
 fi
 

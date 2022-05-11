@@ -18,7 +18,13 @@
 SHELL = /bin/bash
 .SHELLFLAGS += -e
 
-MFT_NAME = mft-$(MFT_VERSION)-$(MFT_REVISION)-x86_64-deb
+ifeq ($(CONFIGURED_ARCH), amd64)
+MFT_ARCH = x86_64
+else
+MFT_ARCH = $(CONFIGURED_ARCH)
+endif
+
+MFT_NAME = mft-$(MFT_VERSION)-$(MFT_REVISION)-$(MFT_ARCH)-deb
 MFT_TGZ = $(MFT_NAME).tgz
 
 SRC_DEB = kernel-mft-dkms_$(MFT_VERSION)-$(MFT_REVISION)_all.deb

@@ -149,6 +149,9 @@ if [[ $CONFIGURED_ARCH == amd64 ]]; then
     sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y install dmidecode hdparm
 fi
 
+## Install kernel DTB file
+sudo cp $debs_path/$LINUX_DTB $FILESYSTEM_ROOT/boot/devicetree.dtb
+
 ## Sign the Linux kernel
 if [ "$SONIC_ENABLE_SECUREBOOT_SIGNATURE" = "y" ]; then
     if [ ! -f $SIGNING_KEY ]; then
@@ -573,7 +576,7 @@ fi
 ## Update initramfs
 sudo chroot $FILESYSTEM_ROOT update-initramfs -u
 ## Convert initrd image to u-boot format
-if [[ $CONFIGURED_ARCH == armhf || $CONFIGURED_ARCH == arm64 ]]; then
+if [[ ($CONFIGURED_ARCH == armhf || $CONFIGURED_ARCH == arm64) && (${sonic_asic_platform} == centec || ${sonic_asic_platform} == marvell) ]]; then
     INITRD_FILE=initrd.img-${LINUX_KERNEL_VERSION}-${CONFIGURED_ARCH}
     if [[ $CONFIGURED_ARCH == armhf ]]; then
         INITRD_FILE=initrd.img-${LINUX_KERNEL_VERSION}-armmp

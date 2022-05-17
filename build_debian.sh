@@ -32,7 +32,7 @@ CONFIGURED_ARCH=$([ -f .arch ] && cat .arch || echo amd64)
 
 ## docker engine version (with platform)
 DOCKER_VERSION=5:20.10.7~3-0~debian-$IMAGE_DISTRO
-LINUX_KERNEL_VERSION=5.10.0-8-2
+LINUX_KERNEL_VERSION=5.10.65
 
 ## Working directory to prepare the file system
 FILESYSTEM_ROOT=./fsroot
@@ -64,7 +64,7 @@ if [[ -d $FILESYSTEM_ROOT ]]; then
 fi
 mkdir -p $FILESYSTEM_ROOT
 mkdir -p $FILESYSTEM_ROOT/$PLATFORM_DIR
-mkdir -p $FILESYSTEM_ROOT/$PLATFORM_DIR/x86_64-grub
+mkdir -p $FILESYSTEM_ROOT/$PLATFORM_DIR/grub
 touch $FILESYSTEM_ROOT/$PLATFORM_DIR/firsttime
 
 ## ensure proc is mounted
@@ -397,11 +397,17 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
     systemd-sysv \
     ntp
 
-if [[ $CONFIGURED_ARCH == amd64 ]]; then
-    sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y download \
-        grub-pc-bin
+if [[ $TARGET_BOOTLOADER == grub ]]; then
+    if [[ $CONFIGURED_ARCH == amd64 ]]; then
+        GRUB_PKG=grub-pc-bin
+    elif [[ $CONFIGURED_ARCH == arm64 ]]; then
+        GRUB_PKG=grub-efi-arm64-bin
+    fi
 
-    sudo mv $FILESYSTEM_ROOT/grub-pc-bin*.deb $FILESYSTEM_ROOT/$PLATFORM_DIR/x86_64-grub
+    sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y download \
+        $GRUB_PKG
+
+    sudo mv $FILESYSTEM_ROOT/grub*.deb $FILESYSTEM_ROOT/$PLATFORM_DIR/grub
 fi
 
 ## Disable kexec supported reboot which was installed by default

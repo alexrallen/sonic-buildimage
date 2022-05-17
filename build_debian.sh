@@ -582,7 +582,7 @@ fi
 ## Update initramfs
 sudo chroot $FILESYSTEM_ROOT update-initramfs -u
 ## Convert initrd image to u-boot format
-if [[ ($CONFIGURED_ARCH == armhf || $CONFIGURED_ARCH == arm64) && (${sonic_asic_platform} == centec || ${sonic_asic_platform} == marvell) ]]; then
+if [[ $TARGET_BOOTLOADER == uboot ]]; then
     INITRD_FILE=initrd.img-${LINUX_KERNEL_VERSION}-${CONFIGURED_ARCH}
     if [[ $CONFIGURED_ARCH == armhf ]]; then
         INITRD_FILE=initrd.img-${LINUX_KERNEL_VERSION}-armmp

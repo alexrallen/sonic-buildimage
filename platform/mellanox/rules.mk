@@ -39,7 +39,9 @@ $(SYNCD)_DEPENDS += $(MLNX_SAI)
 $(SYNCD)_UNINSTALLS += $(MLNX_SAI)
 
 ifeq ($(ENABLE_SYNCD_RPC),y)
-$(SYNCD)_DEPENDS += $(LIBSAITHRIFT_DEV)
+# Remove the libthrift_0.11.0 dependency injected by rules/syncd.mk
+$(SYNCD)_DEPENDS := $(filter-out $(LIBTHRIFT_DEV),$($(SYNCD)_DEPENDS))
+$(SYNCD)_DEPENDS += $(LIBTHRIFT_0_14_1_DEV) $(LIBSAITHRIFT_DEV)
 endif
 
 # Runtime dependency on mlnx sai is set only for syncd

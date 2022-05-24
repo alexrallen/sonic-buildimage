@@ -158,6 +158,11 @@ SAITHRIFT_V2 = y
 SAITHRIFT_VER = v2
 endif
 
+ifeq ($(CONFIGURED_PLATFORM),mellanox)
+SAITHRIFT_V2 = y
+SAITHRIFT_VER = v2
+endif
+
 ifeq ($(SONIC_INCLUDE_SFLOW),y)
 INCLUDE_SFLOW = y
 endif

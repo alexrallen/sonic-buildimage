@@ -16,8 +16,15 @@ SYNCD_RPC = syncd-rpc_1.0.0_$(CONFIGURED_ARCH).deb
 $(SYNCD_RPC)_RDEPENDS += $(LIBSAIREDIS) $(LIBSAIMETADATA)
 $(eval $(call add_derived_package,$(SYNCD),$(SYNCD_RPC)))
 
+$(SYNCD)_DEPENDS += $(LIBSWSSCOMMON_DEV)
+
 # Inject libthrift build dependency for RPC build
-$(SYNCD)_DEPENDS += $(LIBSWSSCOMMON_DEV) $(LIBTHRIFT_DEV)
+ifeq ($(SAITHRIFT_V2),y)
+$(SYNCD)_DEPENDS += $(LIBTHRIFT_0_14_1_DEV)
+else
+$(SYNCD)_DEPENDS += $(LIBTHRIFT_DEV)
+endif
+
 $(SYNCD)_DPKG_TARGET = binary-syncd-rpc
 endif
 

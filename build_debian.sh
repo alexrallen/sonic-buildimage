@@ -33,7 +33,7 @@ CONFIGURED_ARCH=$([ -f .arch ] && cat .arch || echo amd64)
 ## docker engine version (with platform)
 DOCKER_VERSION=5:20.10.14~3-0~debian-$IMAGE_DISTRO
 CONTAINERD_IO_VERSION=1.5.11-1
-LINUX_KERNEL_VERSION=5.10.0-12-2
+LINUX_KERNEL_VERSION=5.10.65
 
 ## Working directory to prepare the file system
 FILESYSTEM_ROOT=./fsroot
@@ -149,6 +149,9 @@ sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y in
 if [[ $CONFIGURED_ARCH == amd64 ]]; then
     sudo LANG=C DEBIAN_FRONTEND=noninteractive chroot $FILESYSTEM_ROOT apt-get -y install dmidecode hdparm
 fi
+
+## Install kernel DTB file
+sudo cp $debs_path/$LINUX_DTB $FILESYSTEM_ROOT/boot/devicetree.dtb
 
 ## Sign the Linux kernel
 if [ "$SONIC_ENABLE_SECUREBOOT_SIGNATURE" = "y" ]; then

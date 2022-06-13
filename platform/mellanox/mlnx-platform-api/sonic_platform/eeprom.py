@@ -41,7 +41,7 @@ logger = Logger()
 #
 EEPROM_SYMLINK = "/var/run/hw-management/eeprom/vpd_info"
 platform_name = DeviceDataManager.get_platform_name()
-if platform_name and 'simx' in platform_name:
+if platform_name and ('simx' in platform_name or 'orin' in platform_name):
     if not os.path.exists(EEPROM_SYMLINK):
         if is_host():
             platform_path = os.path.join('/usr/share/sonic/device', platform_name)

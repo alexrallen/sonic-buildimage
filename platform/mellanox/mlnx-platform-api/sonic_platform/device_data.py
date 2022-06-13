@@ -164,6 +164,8 @@ DEVICE_DATA = {
         }
     },
     'x86_64-nvidia_sn5600-r0': {
+    },
+    'arm64-mlnx_orin-r0': {
     }
 }
 

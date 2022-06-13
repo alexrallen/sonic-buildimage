@@ -57,7 +57,7 @@ def log_error(msg):
 
 machine_info = get_machine_info()
 onie_platform = machine_info['onie_platform']
-if 'simx' in onie_platform:
+if 'simx' in onie_platform or 'orin' in onie_platform:
     platform_path = os.path.join('/usr/share/sonic/device', onie_platform)
     subprocess.check_call(['/usr/bin/xxd', '-r', '-p', 'syseeprom.hex', 'syseeprom.bin'], cwd=platform_path)
     CACHE_FILE = os.path.join(platform_path, 'syseeprom.bin')
@@ -79,7 +79,7 @@ class board(eeprom_tlvinfo.TlvInfoDecoder):
             log_error("Nowhere to read syseeprom from! No symlink or cache file found")
             raise RuntimeError("No syseeprom symlink or cache file found")
 
-        self.eeprom_path = EEPROM_SYMLINK if 'simx' not in onie_platform else CACHE_FILE
+        self.eeprom_path = EEPROM_SYMLINK if ('simx' not in onie_platform and 'orin' not in onie_platform) else CACHE_FILE
         super(board, self).__init__(self.eeprom_path, 0, '', True)
 
     def decode_eeprom(self, e):

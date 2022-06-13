@@ -164,7 +164,7 @@ if [ "$SONIC_ENABLE_SECUREBOOT_SIGNATURE" = "y" ]; then
     fi
 
     echo '[INFO] Signing SONiC linux kernel image'
-    K=$FILESYSTEM_ROOT/boot/vmlinuz-${LINUX_KERNEL_VERSION}-amd64
+    K=$FILESYSTEM_ROOT/boot/vmlinuz-${LINUX_KERNEL_VERSION}-${CONFIGURED_ARCH}
     sbsign --key $SIGNING_KEY --cert $SIGNING_CERT --output /tmp/${K##*/} ${K}
     sudo cp -f /tmp/${K##*/} ${K}
 fi
